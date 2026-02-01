@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Berat | Mood Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.6s ease;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+    }
+
+    .card {
+      background: rgba(0,0,0,0.5);
+      padding: 35px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.6);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.9;
+      margin-bottom: 25px;
+      font-size: 16px;
+      min-height: 24px;
+    }
+
+    button {
+      padding: 12px 26px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(to right, #0072ff, #00c6ff);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 18px #00c6ff;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>👋 Selam, ben Berat</h1>
+    <p id="moodText">Mod: Odaklanmış geliştirici 💻</p>
+    <button onclick="degistir()">Modunu Değiştir</button>
+  </div>
+
+  <script>
+    const modlar = [
+      {
+        text: "Odak modu aktif 💻",
+        bg: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)"
+      },
+      {
+        text: "Uykusuz ama kararlı ☕🌙",
+        bg: "linear-gradient(135deg, #141E30, #243B55)"
+      },
+      {
+        text: "Debug savaşçısı 🛠️",
+        bg: "linear-gradient(135deg, #232526, #414345)"
+      },
+      {
+        text: "Gece 04:00, hâlâ kod yazıyor
