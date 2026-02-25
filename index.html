@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teknoloji Tasarım | Solaris-Go</title>
+
+<style>
+/* --- DINAMIK TEMA DEĞİŞKENLERİ --- */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: rgba(255, 255, 255, 0.8); /* Cam efekti için transparan yapıldı */
+  --text-color: #1e293b;
+  --accent-color: #3b82f6;
+  --grid-color: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --bg-color: #050a15;
+  --card-bg: rgba(17, 24, 39, 0.8); /* Cam efekti için transparan yapıldı */
+  --text-color: #f1f5f9;
+  --accent-color: #60a5fa;
+  --grid-color: #1e293b;
+}
+
+body {
+  margin: 0; padding: 0; min-height: 100vh;
+  background: var(--bg-color);
+  background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+  background-size: 30px 30px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  transition: background 1s ease;
+  overflow: hidden;
+  animation: moveBackground 100s linear infinite;
+}
+
+@keyframes moveBackground { from { background-position: 0 0; } to { background-position: 1000px 1000px; } }
+
+/* --- ÜST İLERLEME ÇİZGİSİ --- */
+#progress-bar {
+  position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+  background: var(--accent-color); z-index: 4000; transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* --- GÖKYÜZÜ SİSTEMİ (SAĞ ÜST) --- */
+#sky-system {
+  position: fixed; top: 15px; right: 15px;
+  width: 100px; height: 100px;
+  z-index: 1; pointer-events: none;
+}
+
+.body-celestial {
+  position: absolute; width: 75px; height: 75px; border-radius: 50%;
+  transition: all 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.sun-detailed {
+  background: radial-gradient(circle at 30% 30%, #ffd700, #ff8c00);
+  box-shadow: 0 0 40px #ff8c00, 0 0 80px rgba(255, 140, 0, 0.3);
+  transform: translateY(0); opacity: 1;
+}
+
+.moon-detailed {
+  background: radial-gradient(circle at 30% 30%, #e2e8f0, #94a3b8);
+  box-shadow: inset -8px -8px 12px rgba(0,0,0,0.2);
+  transform: translateY(-250px); opacity: 0;
+}
+
+.moon-detailed::after {
+  content: ''; position: absolute; top: 25%; left: 45%; width: 12px; height: 12px;
+  background: rgba(0,0,0,0.06); border-radius: 50%;
+  box-shadow: 18px 22px 0 rgba(0,0,0,0.06), -8px 30px 0 rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] .sun-detailed { transform: translateY(250px); opacity: 0; }
+[data-theme="dark"] .moon-detailed { transform: translateY(0); opacity: 1; }
+
+/* --- ALT KONTROL MERKEZİ --- */
+#ui-footer {
+  position: fixed; bottom: 20px;
+  width: 100%; display: flex; flex-direction: column;
+  align-items: center; gap: 15px; z-index: 2000;
+}
+
+#mode-switcher {
+  background: var(--card-bg); padding: 8px 16px; border-radius: 30px;
+  display: flex; gap: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 1px solid var(--grid-color); backdrop-filter: blur(8px);
+}
+
+.mode-btn { cursor: pointer; font-size: 14px; font-weight: bold; }
+
+.nav-controls { display: none; gap: 10px; }
+.nav-btn {
+  padding: 10px 25px; border-radius: 10px; border: 1px solid var(--grid-color);
+  background: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: 600;
+}
+.btn-next { background: var(--accent-color) !important; color: white !important; border: none; }
+
+/* --- KART TASARIMI (CAM MORFİZM) --- */
+#main-container { text-align: center; width: 90%; max-width: 700px; position: relative; z-index: 10; }
+.start-btn { padding: 18px 40px; font-size: 20px; border-radius: 12px; border: none; background: var(--accent-color); color: white; cursor: pointer; font-weight: bold; }
+
+.step-card { 
+  display: none; background: var(--card-bg); 
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); /* Cam efekti */
+  padding: 30px; border-radius: 20px; 
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+  border: 1px solid rgba(255, 255, 255, 0.1); 
+  animation: fadeIn 0.5s; 
+}
+
+.step-card img { width: 100%; border-radius: 14px; margin-bottom: 20px; object-fit: cover; max-height: 350px; }
+.step-card h2 { font-size: 24px; margin-bottom: 12px; color: var(--accent-color); }
+.step-card p { font-size: 16px; line-height: 1.6; text-align: justify; margin: 0; }
+
+/* Profil */
+#top-panel { position: fixed; top: 20px; left: 20px; z-index: 1000; }
+.profile-circle { width: 45px; height: 45px; background: #64748b; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; cursor: pointer; }
+#profile-card { display: none; position: absolute; top: 55px; left: 0; background: var(--card-bg); backdrop-filter: blur(10px); padding: 15px; border-radius: 12px; width: 180px; border: 1px solid var(--grid-color); }
+
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+</style>
+</head>
+
+<body>
+
+<div id="progress-bar"></div>
+
+<div id="sky-system">
+    <div class="body-celestial sun-detailed"></div>
+    <div class="body-celestial moon-detailed"></div>
+</div>
+
+<div id="top-panel">
+    <div class="profile-circle" onclick="toggleProfile()">
+        <svg viewBox="0 0 24 24" width="24" fill="white"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+    </div>
+    <div id="profile-card">
+        <p style="margin:0; font-size:14px; font-weight:bold;">Berat Bilek</p>
+        <p style="margin:5px 0; font-size:12px; color:gray;">No: 377 | 8/E</p>
+    </div>
+</div>
+
+<div id="main-container">
+    <button class="start-btn" id="start-btn" onclick="baslat()">Teknoloji Tasarım Ödevi</button>
+
+    <div id="step-0" class="step-card">
+        <img src="resim3.jpg" alt="Ana Görsel">
+        <h2>Geleceğin Akıllı Sistemleri</h2>
+        <p>Doğa ile teknolojinin mükemmel uyumu.Marka kendi enerjisini üreten şehirler için ilk adımı atıyor.</p>
+    </div>
+
+    <div id="step-1" class="step-card">
+        <h2>Markanın Hikayesi</h2>
+        <p>Her şey bir hayalle başladı: "Teknoloji neden doğaya yük olsun?" Bu soru markayı güneşten ve hareketten güç alan ürünler tasarlamaya itti.</p>
+    </div>
+
+    <div id="step-2" class="step-card">
+        <h2>Markanın Amacı</h2>
+        <p>Markanın Hedefi, şehir hayatındaki her nesneyi birer temiz enerji kaynağına dönüştürmek ve karbon ayak izini tamamen silmek.</p>
+    </div>
+
+    <div id="step-3" class="step-card">
+        <h2>Markanın Vizyonu</h2>
+        <p>2030 yılına kadar, enerjisini dışarıdan almayan, tamamen kendi kendine yeten "Yeşil Şehir" protokollerini hayata geçirmek.</p>
+    </div>
+
+    <div id="step-4" class="step-card">
+        <img src="resim4.jpg" alt="Solaris-Go">
+        <h2>Markanın İlk Ürünü: Solaris-Go</h2>
+        <p>Dış yüzeyi esnek güneş panelleriyle kaplı bir sırt çantası. Yürürken telefonunuzu şarj eder, akşamları ise üzerindeki LED şeritler sayesinde bisiklet sürerken fark edilmeni sağlar.</p>
+    </div>
+</div>
+
+<div id="ui-footer">
+    <div class="nav-controls" id="nav-controls">
+        <button class="nav-btn" onclick="degis(-1)">Geri</button>
+        <button class="nav-btn btn-next" onclick="degis(1)" id="next-text">İleri</button>
+    </div>
+    <div id="mode-switcher">
+        <div class="mode-btn" onclick="setTheme('light')">☀️ Gündüz</div>
+        <div class="mode-btn" onclick="setTheme('dark')">🌙 Gece</div>
+    </div>
+</div>
+
+<script>
+let currentAdim = 0;
+const totalSteps = 5;
+
+function setTheme(theme) {
+    if(theme === 'dark') document.body.setAttribute('data-theme', 'dark');
+    else document.body.removeAttribute('data-theme');
+}
+
+function toggleProfile() {
+    const card = document.getElementById('profile-card');
+    card.style.display = (card.style.display === 'block') ? 'none' : 'block';
+}
+
+function baslat() {
+    document.getElementById('start-btn').style.display = 'none';
+    document.getElementById('nav-controls').style.display = 'flex';
+    goster(0);
+}
+
+function goster(n) {
+    document.querySelectorAll('.step-card').forEach(s => s.style.display = 'none');
+    document.getElementById('step-' + n).style.display = 'block';
+    
+    // İlerleme çubuğunu güncelle
+    const progress = ((n + 1) / totalSteps) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    
+    const nextBtn = document.getElementById('next-text');
+    nextBtn.innerText = (n === totalSteps - 1) ? "Sunumu Bitir" : "İleri";
+}
+
+function degis(n) {
+    currentAdim += n;
+    if(currentAdim >= totalSteps) {
+        alert("Berat Bilek - Sunum Tamamlandı.");
+        currentAdim = totalSteps - 1;
+    }
+    if(currentAdim < 0) currentAdim = 0;
+    goster(currentAdim);
+}
+</script>
+
+</body>
+</html>
