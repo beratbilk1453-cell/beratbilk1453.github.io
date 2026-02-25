@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T.T Ödevi ve Weirdo Site</title>
+
+<style>
+/* ÖDEV MODU STİLLERİ (BEYAZ SAYFA) */
+body.odev-modu {
+  background: white !important;
+  color: black !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-y: auto !important;
+}
+
+body.odev-modu::before { display: none; } /* Arkaplan animasyonunu kapat */
+
+#odev-container {
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.ana-buton {
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+#odev-icerik {
+  display: none;
+  margin-top: 30px;
+  text-align: left;
+}
+
+#odev-icerik img {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.baslik { font-weight: bold; font-size: 1.2em; margin-top: 20px; display: block; }
+
+/* --- ESKİ WEIRDO SİTE STİLLERİ (GİZLİ BAŞLAR) --- */
+#weirdo-main-content { display: none; }
+
+:root{ --bg:#121212; --text:#f1f1f1; --card:#1e1e1e; --glow:none; }
+
+body.weirdo-aktif {
+  background: radial-gradient(circle at center, #121212 0%, #050010 100%);
+  color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex; justify-content: center; align-items: center;
+  overflow: hidden; transition: 0.4s; position: relative;
+}
+
+body.weirdo-aktif::before{
+  content: ""; position: absolute; top: 0; left: 0; width: 200%; height: 200%;
+  background-image: radial-gradient(#ff00ff 2px, transparent 2px), radial-gradient(#00fff7 2px, transparent 2px);
+  background-size: 50px 50px; opacity: 0.1; animation: moveBg 30s linear infinite; z-index: 0; pointer-events: none;
+}
+
+@keyframes moveBg{ 0%{ transform: translate(0,0); } 100%{ transform: translate(-50px,-50px); } }
+
+.card{
+  background: var(--card); padding: 25px; border-radius: 20px; text-align: center;
+  width: 90%; max-width: 420px; box-shadow: 0 10px 40px rgba(0,0,0,0.6), var(--glow);
+  transition: 0.4s; position: relative; z-index: 10; margin: auto;
+}
+
+#quote-box {
+  background: rgba(255,255,255,0.05); padding: 10px; border-radius: 10px;
+  margin-bottom: 15px; font-style: italic; font-size: 14px; border-left: 4px solid #ff00ff;
+}
+
+.internal-modes { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+
+.toggle {
+  padding: 6px 12px; border-radius: 15px; border: 2px solid #ff00ff;
+  background: transparent; color: #ff00ff; font-weight: bold; font-size: 12px;
+  cursor: pointer; transition: 0.3s;
+}
+
+.toggle.active { background: #ff00ff; color: #fff; box-shadow: 0 0 10px #ff00ff; }
+
+.card button:not(.toggle, .ana-buton) {
+  margin: 5px; padding: 10px 15px; border-radius: 12px; border: none;
+  background: #fff; color: #000; font-weight: bold; cursor: pointer; transition: 0.2s;
+}
+
+.card button:not(.toggle, .ana-buton):hover { transform: scale(1.05); box-shadow: 0 0 15px var(--text); }
+
+#weirdo-counter { margin-top: 20px; font-size: 12px; opacity: 0.7; color: #00fff7; }
+
+.emoji-drop {
+  position: fixed; top: -50px; font-size: 28px; z-index: 100;
+  pointer-events: none; animation: fall linear forwards;
+}
+
+@keyframes fall { to { transform: translateY(110vh) rotate(540deg); } }
+
+#sanatBox1, #sanatBox2, #videoBox1, #videoBox2, #videoBox3, #videoBox4, #videoBox5 { display: none; margin-top: 15px; }
+#sanatBox1 img, #sanatBox2 img, video { width: 100%; border-radius: 12px; }
+
+/* Gizli geçiş butonu */
+#go-weirdo { margin-top: 50px; opacity: 0.2; cursor: pointer; border: none; background: none; }
+</style>
+</head>
+
+<body class="odev-modu" id="main-body">
+
+<div id="odev-container">
+  <button class="ana-buton" id="btn-odev" onclick="odeviAc()">T.T Ödevi</button>
+  
+  <div id="odev-icerik">
+    <img src="resim3.jpg" alt="Ödev Resmi">
+    
+    <span class="baslik">Markanın Hikayesi</span>
+    <p>Şehirlerdeki hava kirliliği ve enerji israfını fark eden bir grup genç mühendis, doğayla savaşmayan, aksine doğadan güç alan bir teknoloji hayal eder.</p>
+
+    <span class="baslik">Markanın Amacı</span>
+    <p>Şehir hayatındaki günlük eşyaları (banklar, duraklar, sırt çantaları) akıllı hale getirerek, tamamen kendi enerjisini üreten ve çevreye karbon salınımı yapmayan ürünler geliştirmek.</p>
+
+    <span class="baslik">Markanın Vizyonu</span>
+    <p>Teknolojinin sadece prize takılı bir şey olmadığını, güneşten ve hareketten beslenen yaşayan bir sistem olduğunu kanıtlamak.</p>
+    
+    <button id="go-weirdo" onclick="weirdoModunaGec()">.</button>
+  </div>
+</div>
+
+<div id="weirdo-main-content">
+  <div class="card">
+    <div id="quote-box">"Söz yükleniyor..."</div>
+    <h1>⚡ Weirdo Site</h1>
+    <div class="internal-modes">
+      <button class="toggle active" id="btn-neon" onclick="neon()">NEON</button>
+      <button class="toggle" id="btn-uyku" onclick="uyku()">UYKU</button>
+      <button class="toggle" id="btn-chill" onclick="chill()">CHILL</button>
+    </div>
+    <button onclick="muzik()">Ağaç ve Tavuk</button>
+    <button onclick="sanat(1)">Sanat Eseri</button>
+    <button onclick="sanat2()">Lvbel c5</button>
+    <button onclick="videoGoster(1)">Cuma Mesajı</button>
+    <button onclick="videoGoster(2)">🤨🤨🤨</button>
+    <button onclick="videoGoster(3)">Dayıfest</button>
+    <button onclick="videoGoster(4)">Pic Pulaski</button>
+    <button onclick="videoGoster(5)">Alexander Yarak</button>
+    <button onclick="emojiYagdir()" style="background: linear-gradient(45deg, #ffde03, #ff5252); color: #fff;">Emoji Yağmuru</button>
+
+    <div id="sanatBox1"><img src="resim.jpg"></div>
+    <div id="sanatBox2"><img src="resim2.jpg"></div>
+    <div id="videoBox1"><video id="video1" controls><source src="video.mp4" type="video/mp4"></video></div>
+    <div id="videoBox2"><video id="video2" controls><source src="video2.mp4" type="video/mp4"></video></div>
+    <div id="videoBox3"><video id="video3" controls><source src="video3.mp4" type="video/mp4"></video></div>
+    <div id="videoBox4"><video id="video4" controls><source src="video4.mp4" type="video/mp4"></video></div>
+    <div id="videoBox5"><video id="video5" controls><source src="video5.mp4" type="video/mp4"></video></div>
+
+    <div id="weirdo-counter">Tam <span id="seconds">0</span> saniyedir Weirdo'sun.</div>
+    <br>
+    <button onclick="location.reload()" style="font-size: 10px; background: transparent; color: gray;">Ödev Moduna Dön</button>
+  </div>
+</div>
+
+<script>
+// --- YENİ FONKSİYONLAR ---
+function odeviAc() {
+  document.getElementById('odev-icerik').style.display = 'block';
+  document.getElementById('btn-odev').style.display = 'none';
+}
+
+function weirdoModunaGec() {
+  document.getElementById('odev-container').style.display = 'none';
+  document.getElementById('weirdo-main-content').style.display = 'block';
+  document.getElementById('main-body').classList.remove('odev-modu');
+  document.getElementById('main-body').classList.add('weirdo-aktif');
+}
+
+// --- ESKİ SCRIPT KODLARI (AYNEN KORUNDU) ---
+const sozler = [
+  "Ağaç deyip geçme, o da bir tavuktur aslında.",
+  "Alexander izleyince gelen o garip his...",
+  "Pic Pulaski izlemeyen bu hayatı yaşamamıştır.",
+  "Cuma mesajı atmayanın Lvbel c5'i yarım kalır.",
+  "Dayıfest'e girmeyen hayatı 144p yaşar.",
+  "🤨 emojisi bir yaşam biçimidir kardeşim.",
+  "Neon modda olmayan bizden değildir.",
+  "Hacklenmedin, sadece Weirdo Site'tasın rahat ol."
+];
+
+function sozDegistir() {
+  document.getElementById('quote-box').innerText = '"' + sozler[Math.floor(Math.random() * sozler.length)] + '"';
+}
+sozDegistir();
+
+let saniye = 0;
+setInterval(() => {
+  if(document.getElementById('main-body').classList.contains('weirdo-aktif')){
+    saniye++;
+    document.getElementById('seconds').innerText = saniye;
+    if(saniye % 15 === 0) sozDegistir();
+  }
+}, 1000);
+
+function temizleMod(){ document.querySelectorAll('.toggle').forEach(b => b.classList.remove('active')); }
+
+function neon(){
+  temizleMod(); document.getElementById('btn-neon').classList.add('active');
+  const r = document.documentElement.style;
+  r.setProperty('--bg','#050010'); r.setProperty('--text','#00fff7');
+  r.setProperty('--card','#0b0020'); r.setProperty('--glow','0 0 15px #00fff7, 0 0 30px #ff00ff');
+}
+
+function uyku(){
+  temizleMod(); document.getElementById('btn-uyku').classList.add('active');
+  const r = document.documentElement.style;
+  r.setProperty('--bg','#020617'); r.setProperty('--text','#94a3b8'); r.setProperty('--card','#1e293b'); r.setProperty('--glow','none');
+}
+
+function chill(){
+  temizleMod(); document.getElementById('btn-chill').classList.add('active');
+  const r = document.documentElement.style;
+  r.setProperty('--bg','#052e2b'); r.setProperty('--text','#5eead4'); r.setProperty('--card','#064e3b'); r.setProperty('--glow','none');
+}
+
+function emojiYagdir(){
+  const emojiler = ['🐔', '🌲', '⚡', '🤨', '🍀', '🍗', '🍕', '🚀', '🌈', '💎', '🔥', '👽', '👾', '🐱'];
+  for(let i=0; i<40; i++){
+    setTimeout(() => {
+      const e = document.createElement('div');
+      e.className = 'emoji-drop';
+      e.innerText = emojiler[Math.floor(Math.random() * emojiler.length)];
+      e.style.left = Math.random() * 100 + 'vw';
+      e.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      e.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      document.body.appendChild(e);
+      setTimeout(() => e.remove(), 5000);
+    }, i * 150);
+  }
+}
+
+const ses1 = new Audio("ses.mp3");
+const ses2 = new Audio("ses2.mp3");
+
+function muzik(){ if(ses1.paused) ses1.play(); else ses1.pause(); }
+
+function herSeyiKapat(){
+  document.querySelectorAll('#sanatBox1, #sanatBox2, #videoBox1, #videoBox2, #videoBox3, #videoBox4, #videoBox5').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('video').forEach(v => v.pause());
+  ses1.pause(); ses2.pause();
+}
+
+function sanat(num){ herSeyiKapat(); document.getElementById("sanatBox1").style.display = "block"; }
+function sanat2(){ herSeyiKapat(); document.getElementById("sanatBox2").style.display = "block"; ses2.currentTime = 0; ses2.play(); }
+
+function videoGoster(num){
+  const targetBox = document.getElementById("videoBox" + num);
+  const suAnAcikMi = targetBox.style.display === "block";
+  herSeyiKapat();
+  if(!suAnAcikMi) targetBox.style.display = "block";
+}
+</script>
+
+</body>
+</html>
