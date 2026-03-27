@@ -1,0 +1,20 @@
+<div class="search-container">
+  <input type="text" id="arama" placeholder="Bir şey ara...">
+  <button onclick="ara()">Ara</button>
+</div>
+
+<script>
+function ara() {
+  let query = document.getElementById("arama").value;
+  if(query.trim() === "") return;
+
+  // Yeni sekmede Google açılıyor
+  let url = "https://www.google.com/search?q=" + encodeURIComponent(query);
+  window.open(url, "_blank"); // Yeni sekmede aç
+}
+
+// Enter ile arama
+document.getElementById("arama").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") ara();
+});
+</script>
