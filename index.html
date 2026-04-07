@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilgi Sorgu Paneli</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { text-align: center; color: #333; }
+        select, input, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #0056b3; }
+        #sonuc { margin-top: 20px; padding: 15px; border-radius: 5px; background: #e9ecef; white-space: pre-wrap; font-family: monospace; display: none; }
+        .gizli { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sorgu Sistemi</h2>
+    
+    <label for="kategori">Sorgu Türü Seçin:</label>
+    <select id="kategori" onchange="inputlariGuncelle()">
+        <option value="gsm">TC'den GSM Sorgu</option>
+        <option value="sulale">Sülale Sorgu</option>
+        <option value="adres">Adres Sorgu</option>
+        <option value="adsoyad">Ad Soyad Sorgu</option>
+        <option value="gsmtc">GSM'den TC Sorgu</option>
+    </select>
+
+    <div id="tekliInput">
+        <input type="text" id="anaInput" placeholder="TC No Giriniz">
+    </div>
+
+    <div id="cokluInput" class="gizli">
+        <input type="text" id="ad" placeholder="Ad">
+        <input type="text" id="soyad" placeholder="Soyad">
+        <input type="text" id="il" placeholder="İl">
+        <input type="text" id="ilce" placeholder="İlçe">
+    </div>
+
+    <button onclick="sorgula()">Sorgula</button>
+
+    <div id="sonuc"></div>
+</div>
+
+<script>
+    function inputlariGuncelle() {
+        const kat = document.getElementById('kategori').value;
+        const tekli = document.getElementById('tekliInput');
+        const coklu = document.getElementById('cokluInput');
+        const anaInput = document.getElementById('anaInput');
+
+        if (kat === 'adsoyad') {
+            tekli.classList.add('gizli');
+            coklu.classList.remove('gizli');
+        } else {
+            tekli.classList.remove('gizli');
+            coklu.classList.add('gizli');
+            anaInput.placeholder = (kat === 'gsmtc') ? "GSM No Giriniz" : "TC No Giriniz";
+        }
+    }
+
+    async function sorgula() {
+        const kat = document.getElementById('kategori').value;
+        const sonucDiv = document.getElementById('sonuc');
+        let url = "";
+
+        if (kat === 'adsoyad') {
+            const ad = document.getElementById('ad').value;
+            const soyad = document.getElementById('soyad').value;
+            const il = document.getElementById('il').value;
+            const ilce = document.getElementById('ilce').value;
+            url = `https://arastir.sbs/api/adsoyad.php?adi=${ad}&soyadi=${soyad}&il=${il}&ilce=${ilce}`;
+        } else {
+            const deger = document.getElementById('anaInput').value;
+            if (kat === 'gsm') url = `https://arastir.sbs/api/tcgsm.php?tc=${deger}`;
+            if (kat === 'sulale') url = `https://arastir.sbs/api/sulale.php?tc=${deger}`;
+            if (kat === 'adres') url = `https://arastir.sbs/api/adres.php?tc=${deger}`;
+            if (kat === 'gsmtc') url = `https://arastir.sbs/api/gsmtc.php?gsm=${deger}`;
+        }
+
+        sonucDiv.style.display = "block";
+        sonucDiv.innerText = "Sorgulanıyor...";
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            // Gelen JSON verisini güzelce formatlayıp ekrana yazıyoruz
+            sonucDiv.innerText = JSON.stringify(data, null, 2);
+        } catch (error) {
+            sonucDiv.innerText = "Hata: Veri çekilemedi veya API yanıt vermiyor.";
+            console.error("Hata:", error);
+        }
+    }
+</script>
+
+</body>
+</html>
