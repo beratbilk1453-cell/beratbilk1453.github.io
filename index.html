@@ -33,11 +33,10 @@
             background: #ffffff;
             padding: 12px 0;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            z-index: 1001; /* Haritanın önünde kalması için */
         }
         .navbar-brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.4rem; }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
             height: 65vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop');
@@ -45,43 +44,26 @@
             display: flex; align-items: center; color: white; text-align: center;
         }
 
-        /* Neden Biz & İstatistikler */
+        /* Neden Biz Bölümü */
         .reason-icon {
             width: 60px; height: 60px; background: var(--light-bg); color: var(--wood-brown);
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%; margin: 0 auto 15px; font-size: 24px;
         }
-        .stats-section { background: var(--wood-brown); color: white; padding: 40px 0; }
 
         /* Ürün Kartları */
         .product-card { border: none; border-radius: 15px; transition: 0.4s; background: #fff; overflow: hidden; }
         .product-card img { height: 240px; object-fit: cover; width: 100%; }
         .product-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* Galeri */
-        .gallery-img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .gallery-img:hover { filter: brightness(0.8); }
+        /* Atölye Galeri Fotoğrafları */
+        .gallery-img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; }
 
-        /* İletişim */
-        .contact-box { display: flex; align-items: center; margin-bottom: 20px; }
+        /* İletişim Alanı */
+        .contact-box { display: flex; align-items: center; margin-bottom: 25px; }
         .contact-icon { width: 45px; height: 45px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-right: 15px; flex-shrink: 0; }
-        .btn-wood { background-color: var(--wood-brown); color: white; border-radius: 8px; padding: 12px 25px; border: none; font-weight: 600; text-decoration: none; display: inline-block; }
+        .btn-wood { background-color: var(--wood-brown); color: white; border-radius: 8px; padding: 12px 25px; border: none; font-weight: 600; }
         .btn-wood:hover { background-color: #3e2723; color: white; }
-
-        /* Harita */
-        .map-container {
-            width: 100%;
-            height: 300px;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
 
         /* YÜZER ARA BUTONU */
         .floating-call {
@@ -135,29 +117,18 @@
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="reason-icon"><i class="fas fa-tree"></i></div>
                     <h5 class="fw-bold">Gerçek Ağaç</h5>
-                    <p class="text-muted small">Sadece %100 doğal masif ağaçlarla çalışıyoruz.</p>
+                    <p class="text-muted small px-2">Sadece %100 doğal masif ağaçlarla çalışıyoruz.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="reason-icon"><i class="fas fa-hammer"></i></div>
                     <h5 class="fw-bold">Butik Üretim</h5>
-                    <p class="text-muted small">Her bir parça usta ellerde titizlikle işlenir.</p>
+                    <p class="text-muted small px-2">Her bir parça usta ellerde titizlikle işlenir.</p>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="reason-icon"><i class="fas fa-shield-alt"></i></div>
                     <h5 class="fw-bold">Uzun Ömürlü</h5>
-                    <p class="text-muted small">Nesiller boyu kullanılabilecek sağlamlık.</p>
+                    <p class="text-muted small px-2">Nesiller boyu kullanılabilecek sağlam mobilyalar.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="stats-section">
-        <div class="container">
-            <div class="row text-center g-4">
-                <div class="col-6 col-md-3"><h3>500+</h3><p class="small mb-0">Mutlu Müşteri</p></div>
-                <div class="col-6 col-md-3"><h3>1000+</h3><p class="small mb-0">Üretilen Mobilya</p></div>
-                <div class="col-6 col-md-3"><h3>%100</h3><p class="small mb-0">El İşçiliği</p></div>
-                <div class="col-6 col-md-3"><h3>Kepez</h3><p class="small mb-0">Antalya Atölye</p></div>
             </div>
         </div>
     </section>
@@ -168,18 +139,33 @@
             <div class="mx-auto" style="width: 50px; height: 3px; background: var(--wood-brown);"></div>
         </div>
         <div class="row g-4">
-            <div class="col-md-4" data-aos="zoom-in"><div class="card product-card shadow-sm"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80" alt="Koltuk"><div class="card-body text-center"><h5 class="fw-bold">Ahşap Koltuk</h5></div></div></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100"><div class="card product-card shadow-sm"><img src="https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80" alt="Masa"><div class="card-body text-center"><h5 class="fw-bold">Yemek Masası</h5></div></div></div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200"><div class="card product-card shadow-sm"><img src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80" alt="Kitaplık"><div class="card-body text-center"><h5 class="fw-bold">Modern Raf</h5></div></div></div>
+            <div class="col-md-4" data-aos="zoom-in">
+                <div class="card product-card shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80" alt="Koltuk">
+                    <div class="card-body text-center"><h5 class="fw-bold">Ahşap Koltuk</h5></div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card product-card shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80" alt="Masa">
+                    <div class="card-body text-center"><h5 class="fw-bold">Yemek Masası</h5></div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card product-card shadow-sm border-0">
+                    <img src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80" alt="Kitaplık">
+                    <div class="card-body text-center"><h5 class="fw-bold">Modern Raf</h5></div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="container py-5 bg-light rounded-4">
-        <h2 class="text-center fw-bold mb-4">Atölyeden Kareler</h2>
+        <h2 class="text-center fw-bold mb-4" data-aos="fade-up">Atölyeden Kareler</h2>
         <div class="row g-2">
-            <div class="col-4"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
-            <div class="col-4"><img src="https://images.unsplash.com/photo-1461988625982-7e46a099bf4f?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
-            <div class="col-4"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
+            <div class="col-4" data-aos="fade-up"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
+            <div class="col-4" data-aos="fade-up" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1461988625982-7e46a099bf4f?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
+            <div class="col-4" data-aos="fade-up" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=500" class="gallery-img shadow-sm" alt="Atölye"></div>
         </div>
     </section>
 
@@ -188,17 +174,20 @@
             <div class="row">
                 <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
                     <h2 class="fw-bold mb-4">Bize Ulaşın</h2>
-                    <div class="contact-box"><div class="contact-icon text-success"><i class="fas fa-phone-alt"></i></div><div><p class="small text-muted mb-0">Telefon</p><h6 class="mb-0">0542 657 08 28</h6></div></div>
-                    <div class="contact-box"><div class="contact-icon text-primary"><i class="fas fa-envelope"></i></div><div><p class="small text-muted mb-0">E-Posta</p><h6 class="mb-0">yusufbilekbernardo@gmail.com</h6></div></div>
-                    <div class="contact-box"><div class="contact-icon text-danger"><i class="fas fa-map-marker-alt"></i></div><div><p class="small text-muted mb-0">Konum</p><h6 class="mb-0">Ayanoğlu Mah. 1901 Sok. Kepez, Antalya</h6></div></div>
-                    
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1595.275825319803!2d30.718870196726593!3d36.938814769062334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c39178229b1049%3A0xc665b16955776e7c!2sAtes%20Park%20Konutlari!5e0!3m2!1str!2str!4v1711202868213!5m2!1str!2str" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                    <div class="contact-box">
+                        <div class="contact-icon text-success"><i class="fas fa-phone-alt"></i></div>
+                        <div><p class="small text-muted mb-0">Telefon</p><h6 class="mb-0">0542 657 08 28</h6></div>
+                    </div>
+                    <div class="contact-box">
+                        <div class="contact-icon text-primary"><i class="fas fa-envelope"></i></div>
+                        <div><p class="small text-muted mb-0">E-Posta</p><h6 class="mb-0">yusufbilekbernardo@gmail.com</h6></div>
+                    </div>
+                    <div class="contact-box">
+                        <div class="contact-icon text-danger"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <p class="small text-muted mb-0">Konum</p>
+                            <h6 class="mb-0 lh-base">Ayanoğlu Mah. 1901 Sok. Ateş Park Konutları Karşısı, Kepez/Antalya</h6>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
@@ -223,7 +212,7 @@
                 <a href="#" class="text-white mx-2"><i class="fab fa-instagram fa-lg"></i></a>
                 <a href="https://wa.me/905426570828" class="text-white mx-2"><i class="fab fa-whatsapp fa-lg"></i></a>
             </div>
-            <p class="small text-muted mb-0">&copy; 2026 ÖBY Ahşap. Antalya.</p>
+            <p class="small text-muted mb-0">© 2026 ÖBY Ahşap. Antalya.</p>
         </div>
     </footer>
 
