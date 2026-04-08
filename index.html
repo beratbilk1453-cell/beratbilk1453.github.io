@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÖBY Ahşap | Doğal Dokunuş, Profesyonel İşçilik</title>
+    <title>ÖBY Ahşap | Profesyonel Tasarım</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -13,67 +13,96 @@
     <style>
         :root {
             --wood-brown: #5d4037;
-            --light-wood: #d7ccc8;
-            --dark-bg: #212121;
+            --dark-bg: #1a1a1a;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Navbar */
+        /* Navbar Düzeltmesi */
         .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #ffffff;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
         }
 
-        /* Hero Section */
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Menü Butonu Hizalama */
+        .navbar-toggler {
+            border: none;
+            padding: 5px;
+        }
+        
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        /* Hero Bölümü */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80');
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
-            justify-content: center;
             color: white;
             text-align: center;
         }
 
-        /* Ürünler */
+        /* Ürün Kartları */
         .product-card {
             border: none;
-            transition: transform 0.3s ease;
-            margin-bottom: 30px;
-            overflow: hidden;
             border-radius: 15px;
+            overflow: hidden;
+            transition: 0.4s;
+            margin-bottom: 25px;
         }
 
         .product-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .product-card img {
-            height: 250px;
+            height: 280px;
             object-fit: cover;
         }
 
-        /* İletişim */
-        .contact-section {
-            background-color: #f8f9fa;
-            padding: 80px 0;
+        /* İletişim Alanı Hizalaması (Yamukluk Giderildi) */
+        .contact-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-right: 20px;
+            flex-shrink: 0; /* İkonun küçülmesini engeller */
         }
 
         .btn-wood {
             background-color: var(--wood-brown);
             color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
+            border-radius: 8px;
+            padding: 12px 25px;
             transition: 0.3s;
         }
 
@@ -85,22 +114,30 @@
         footer {
             background: var(--dark-bg);
             color: white;
-            padding: 40px 0;
+            padding: 50px 0 20px;
+        }
+
+        /* Mobil Ayarlar */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .contact-box { justify-content: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#">ÖBY <span style="color: var(--wood-brown);">AHŞAP</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#">ÖBY <span class="ms-1" style="color: var(--wood-brown);">AHŞAP</span></a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+
+            <div class="collapse navbar-collapse" id="mobileMenu">
+                <ul class="navbar-nav ms-auto fw-semibold">
                     <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Ürünlerimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Ürünler</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
                 </ul>
             </div>
@@ -108,87 +145,105 @@
     </nav>
 
     <section class="hero" id="home">
-        <div class="container" data-aos="fade-up">
-            <h1 class="display-2 fw-bold">ÖBY Ahşap ile Doğallığı Keşfedin</h1>
-            <p class="lead mb-4">Evinize değer katan el işçiliği koltuklar, masalar ve özel tasarım mobilyalar.</p>
-            <a href="#products" class="btn btn-wood btn-lg">Ürünleri İncele</a>
+        <div class="container" data-aos="zoom-out">
+            <h1 class="display-3 fw-bold">Doğadan Evinize</h1>
+            <p class="fs-5 mb-4">Ustalıkla işlenmiş ahşabın en şık hali.</p>
+            <a href="#products" class="btn btn-wood btn-lg">Koleksiyonu Gör</a>
         </div>
     </section>
 
-    <section class="container my-5 py-5" id="products">
-        <h2 class="text-center mb-5" data-aos="fade-down">Koleksiyonumuz</h2>
+    <section class="container py-5" id="products">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold">Özel Tasarımlarımız</h2>
+            <div class="mx-auto" style="width: 60px; height: 4px; background: var(--wood-brown);"></div>
+        </div>
+
         <div class="row">
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="card product-card shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=60" class="card-img-top" alt="Masa">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Doğal Kenar Masa</h5>
-                        <p class="card-text text-muted text-center">Ceviz ağacından üretilmiş özel tasarım.</p>
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80" class="card-img-top" alt="Koltuk">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Ahşap Koltuk</h5>
+                        <p class="text-muted">Konforlu ve modern hatlar.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="card product-card shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=60" class="card-img-top" alt="Koltuk">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Ahşap İskelet Koltuk</h5>
-                        <p class="card-text text-muted text-center">Konfor ve estetiğin mükemmel uyumu.</p>
+                    <img src="https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80" class="card-img-top" alt="Masa">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Yemek Masası</h5>
+                        <p class="text-muted">Masif meşe, el işçiliği.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="card product-card shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=60" class="card-img-top" alt="Dekoratif">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Modern Kitaplık</h5>
-                        <p class="card-text text-muted text-center">Minimalist ve dayanıklı ahşap çözümler.</p>
+                    <img src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80" class="card-img-top" alt="Kitaplık">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold">Modern Kitaplık</h5>
+                        <p class="text-muted">Şıklığı ve düzeni birleştirin.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact-section" id="contact">
+    <section class="bg-light py-5" id="contact">
         <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <h2 class="mb-4">Bizimle İletişime Geçin</h2>
-                    <p class="mb-4 text-muted">Özel siparişleriniz ve projeleriniz için bize ulaşabilirsiniz.</p>
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-phone-alt fa-2x me-3 text-success"></i>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
+                    <h2 class="display-6 fw-bold mb-4">Bize Ulaşın</h2>
+                    
+                    <div class="contact-box">
+                        <div class="contact-icon text-success">
+                            <i class="fas fa-phone-alt fa-lg"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-0">Telefon</h6>
-                            <p class="mb-0">0542 657 08 28</p>
+                            <p class="small text-muted mb-0">Telefon</p>
+                            <h5 class="mb-0">0542 657 08 28</h5>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-envelope fa-2x me-3 text-primary"></i>
+
+                    <div class="contact-box">
+                        <div class="contact-icon text-primary">
+                            <i class="fas fa-envelope fa-lg"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-0">E-Posta</h6>
-                            <p class="mb-0">yusufbilekbernardo@gmail.com</p>
+                            <p class="small text-muted mb-0">E-Posta</p>
+                            <h5 class="mb-0">yusufbilekbernardo@gmail.com</h5>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-map-marker-alt fa-2x me-3 text-danger"></i>
+
+                    <div class="contact-box">
+                        <div class="contact-icon text-danger">
+                            <i class="fas fa-map-marker-alt fa-lg"></i>
+                        </div>
                         <div>
-                            <h6 class="mb-0">Merkez</h6>
-                            <p class="mb-0">İstanbul, Türkiye</p>
+                            <p class="small text-muted mb-0">Konum</p>
+                            <h5 class="mb-0">Antalya, Türkiye</h5>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-6" data-aos="fade-left">
-                    <form class="bg-white p-4 rounded shadow-sm">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Adınız Soyadınız">
-                        </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="E-posta Adresiniz">
-                        </div>
-                        <div class="mb-3">
-                            <textarea class="form-control" rows="4" placeholder="Mesajınız"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-wood w-100">Gönder</button>
-                    </form>
+                    <div class="bg-white p-4 rounded-4 shadow-sm">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label small">Ad Soyad</label>
+                                <input type="text" class="form-control" placeholder="Adınız">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">E-Posta</label>
+                                <input type="email" class="form-control" placeholder="E-posta adresiniz">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Mesajınız</label>
+                                <textarea class="form-control" rows="4" placeholder="Size nasıl yardımcı olabiliriz?"></textarea>
+                            </div>
+                            <button class="btn btn-wood w-100 fw-bold shadow-sm">Mesajı Gönder</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -196,13 +251,14 @@
 
     <footer class="text-center">
         <div class="container">
-            <h3>ÖBY AHŞAP</h3>
-            <div class="my-4">
-                <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
-                <a href="#" class="text-white"><i class="fab fa-whatsapp fa-lg"></i></a>
+            <h4 class="fw-bold mb-4">ÖBY AHŞAP</h4>
+            <div class="mb-4">
+                <a href="#" class="text-white mx-2 fs-4"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2 fs-4"><i class="fab fa-facebook"></i></a>
+                <a href="https://wa.me/905426570828" class="text-white mx-2 fs-4"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p class="mb-0">&copy; 2024 ÖBY Ahşap. Tüm Hakları Saklıdır.</p>
+            <hr class="bg-secondary">
+            <p class="small text-muted mb-0">&copy; 2026 ÖBY Ahşap. Tüm Hakları Saklıdır.</p>
         </div>
     </footer>
 
@@ -211,7 +267,8 @@
     <script>
         AOS.init({
             duration: 1000,
-            once: true
+            once: true,
+            offset: 100
         });
     </script>
 </body>
