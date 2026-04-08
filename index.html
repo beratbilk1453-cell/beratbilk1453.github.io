@@ -11,12 +11,13 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* EKRAN KAYMASINI ENGELLEYEN KRİTİK AYARLAR */
+        /* EKRAN KAYMASINI ENGELLEYEN AYARLAR */
         html, body {
             max-width: 100%;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
         }
 
         :root {
@@ -29,7 +30,7 @@
             background-color: #fff;
         }
 
-        /* Navbar Düzeltmesi */
+        /* Navbar */
         .navbar {
             background: #ffffff;
             padding: 12px 0;
@@ -40,8 +41,6 @@
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             font-size: 1.4rem;
-            display: flex;
-            align-items: center;
         }
 
         /* Hero Bölümü */
@@ -65,31 +64,30 @@
             margin-bottom: 25px;
             background: #fff;
         }
+        .product-card img { height: 250px; object-fit: cover; width: 100%; }
 
-        .product-card img {
-            height: 250px;
-            object-fit: cover;
-            width: 100%;
-        }
-
-        /* İletişim Alanı Hizalaması (Tam Simetrik) */
-        .contact-box {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .contact-icon {
-            width: 45px;
-            height: 45px;
-            background: #f8f9fa;
+        /* Neden Biz Bölümü Stilleri */
+        .reason-icon {
+            width: 70px;
+            height: 70px;
+            background: #f8f1ef;
+            color: var(--wood-brown);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
-            margin-right: 15px;
-            flex-shrink: 0;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            transition: 0.3s;
         }
+        .reason-card:hover .reason-icon {
+            background: var(--wood-brown);
+            color: white;
+        }
+
+        /* İletişim Kutuları */
+        .contact-box { display: flex; align-items: center; margin-bottom: 20px; }
+        .contact-icon { width: 45px; height: 45px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-right: 15px; flex-shrink: 0; }
 
         .btn-wood {
             background-color: var(--wood-brown);
@@ -99,43 +97,45 @@
             border: none;
             transition: 0.3s;
         }
+        .btn-wood:hover { background-color: #3e2723; color: white; transform: scale(1.02); }
 
-        .btn-wood:hover {
-            background-color: #3e2723;
+        /* YÜZER ŞİMDİ ARA BUTONU */
+        .floating-call {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #28a745;
             color: white;
-            transform: scale(1.02);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-decoration: none;
+            transition: 0.3s;
+            animation: pulse 2s infinite;
+        }
+        .floating-call:hover { transform: scale(1.1); color: white; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
         }
 
-        footer {
-            background: var(--dark-bg);
-            color: white;
-            padding: 40px 0 20px;
-        }
-
-        /* Mobil Boşluk Düzeltme */
-        .row {
-            margin-right: 0;
-            margin-left: 0;
-        }
+        footer { background: var(--dark-bg); color: white; padding: 40px 0 20px; }
+        .row { margin-right: 0; margin-left: 0; }
     </style>
 </head>
 <body>
 
     <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">ÖBY <span class="ms-1" style="color: var(--wood-brown);">AHŞAP</span></a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="mobileMenu">
-                <ul class="navbar-nav ms-auto fw-semibold text-center">
-                    <li class="nav-item"><a class="nav-link" href="#home">Ana Sayfa</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Ürünler</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
-                </ul>
-            </div>
+        <div class="container text-center">
+            <a class="navbar-brand mx-auto" href="#">ÖBY <span style="color: var(--wood-brown);">AHŞAP</span></a>
         </div>
     </nav>
 
@@ -147,38 +147,51 @@
         </div>
     </section>
 
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-5" data-aos="fade-up">Neden Biz?</h2>
+            <div class="row g-4">
+                <div class="col-md-4 reason-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="reason-icon"><i class="fas fa-tree"></i></div>
+                    <h5 class="fw-bold">Masif Ağaç</h5>
+                    <p class="text-muted small px-3">Sunta veya MDF kullanmıyoruz. Sadece dayanıklı ve doğal masif ağaçlar işliyoruz.</p>
+                </div>
+                <div class="col-md-4 reason-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="reason-icon"><i class="fas fa-tools"></i></div>
+                    <h5 class="fw-bold">Usta İşçilik</h5>
+                    <p class="text-muted small px-3">Her parça atölyemizde özenle, geleneksel el işçiliği teknikleriyle üretilir.</p>
+                </div>
+                <div class="col-md-4 reason-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="reason-icon"><i class="fas fa-truck-loading"></i></div>
+                    <h5 class="fw-bold">Güvenli Teslimat</h5>
+                    <p class="text-muted small px-3">Ürünlerinizi kapınıza kadar güvenle getiriyor ve kurulumunu yapıyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="container py-5" id="products">
         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 class="display-6 fw-bold">Özel Tasarımlarımız</h2>
+            <h2 class="display-6 fw-bold">Tasarım Ürünlerimiz</h2>
             <div class="mx-auto" style="width: 50px; height: 3px; background: var(--wood-brown);"></div>
         </div>
-
         <div class="row g-4">
             <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
                 <div class="card product-card shadow-sm border-0">
                     <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=80" alt="Koltuk">
-                    <div class="card-body text-center">
-                        <h5 class="fw-bold">Modern Koltuk</h5>
-                        <p class="text-muted small">Şık ve sağlam iskelet.</p>
-                    </div>
+                    <div class="card-body text-center"><h5 class="fw-bold">Modern Koltuk</h5><p class="text-muted small">Sağlam ahşap iskelet.</p></div>
                 </div>
             </div>
             <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
                 <div class="card product-card shadow-sm border-0">
                     <img src="https://images.unsplash.com/photo-1530018607912-eff2daa1bac4?auto=format&fit=crop&q=80" alt="Masa">
-                    <div class="card-body text-center">
-                        <h5 class="fw-bold">Doğal Masa</h5>
-                        <p class="text-muted small">Masif meşe işçiliği.</p>
-                    </div>
+                    <div class="card-body text-center"><h5 class="fw-bold">Yemek Masası</h5><p class="text-muted small">Özel ceviz kaplama.</p></div>
                 </div>
             </div>
             <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
                 <div class="card product-card shadow-sm border-0">
                     <img src="https://images.unsplash.com/photo-1532323544230-7191fd51bc1b?auto=format&fit=crop&q=80" alt="Kitaplık">
-                    <div class="card-body text-center">
-                        <h5 class="fw-bold">Özel Tasarım Kitaplık</h5>
-                        <p class="text-muted small">Evinize hava katar.</p>
-                    </div>
+                    <div class="card-body text-center"><h5 class="fw-bold">Ahşap Kitaplık</h5><p class="text-muted small">Dekoratif çözümler.</p></div>
                 </div>
             </div>
         </div>
@@ -188,44 +201,32 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
-                    <h2 class="fw-bold mb-4">Bize Ulaşın</h2>
-                    
+                    <h2 class="fw-bold mb-4">İletişime Geçin</h2>
                     <div class="contact-box">
                         <div class="contact-icon text-success"><i class="fas fa-phone-alt"></i></div>
                         <div><p class="small text-muted mb-0">Telefon</p><h6 class="mb-0">0542 657 08 28</h6></div>
                     </div>
-
                     <div class="contact-box">
                         <div class="contact-icon text-primary"><i class="fas fa-envelope"></i></div>
                         <div><p class="small text-muted mb-0">E-Posta</p><h6 class="mb-0">yusufbilekbernardo@gmail.com</h6></div>
                     </div>
-
-                    <div class="contact-box">
-                        <div class="contact-icon text-danger"><i class="fas fa-map-marker-alt"></i></div>
-                        <div><p class="small text-muted mb-0">Konum</p><h6 class="mb-0">İstanbul, Türkiye</h6></div>
-                    </div>
                 </div>
-
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="bg-white p-4 rounded-4 shadow-sm">
                         <form id="whatsappForm">
-                            <div class="mb-3">
-                                <label class="form-label small fw-bold">Ad Soyad</label>
-                                <input type="text" id="userName" class="form-control bg-light border-0" placeholder="Adınız" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label small fw-bold">Mesajınız</label>
-                                <textarea id="userMessage" class="form-control bg-light border-0" rows="3" placeholder="Sormak istediğiniz ürün nedir?" required></textarea>
-                            </div>
-                            <button type="button" onclick="sendToWhatsApp()" class="btn btn-wood w-100 fw-bold">
-                                <i class="fab fa-whatsapp me-2"></i> WhatsApp'tan Sor
-                            </button>
+                            <div class="mb-3"><label class="form-label small fw-bold">Ad Soyad</label><input type="text" id="userName" class="form-control bg-light border-0" placeholder="Adınız" required></div>
+                            <div class="mb-3"><label class="form-label small fw-bold">Mesajınız</label><textarea id="userMessage" class="form-control bg-light border-0" rows="3" placeholder="Sormak istediğiniz ürün nedir?" required></textarea></div>
+                            <button type="button" onclick="sendToWhatsApp()" class="btn btn-wood w-100 fw-bold"><i class="fab fa-whatsapp me-2"></i> WhatsApp'tan Sor</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <a href="tel:05426570828" class="floating-call">
+        <i class="fas fa-phone-alt"></i>
+    </a>
 
     <footer class="text-center">
         <div class="container">
@@ -241,23 +242,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Animasyon Başlatma
-        AOS.init({ duration: 800, once: true, offset: 50 });
+        AOS.init({ duration: 800, once: true });
 
-        // WhatsApp Gönderme Fonksiyonu
         function sendToWhatsApp() {
             const name = document.getElementById('userName').value;
             const message = document.getElementById('userMessage').value;
             const phoneNumber = "905426570828";
-            
             if(name && message) {
                 const text = `Merhaba ÖBY Ahşap, ben ${name}. ${message}`;
-                const encodedText = encodeURIComponent(text);
-                const url = `https://wa.me/${phoneNumber}?text=${encodedText}`;
-                window.open(url, '_blank');
-            } else {
-                alert("Lütfen tüm alanları doldurun.");
-            }
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`, '_blank');
+            } else { alert("Lütfen tüm alanları doldurun."); }
         }
     </script>
 </body>
